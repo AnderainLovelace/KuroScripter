@@ -172,6 +172,7 @@ void Script_LoadGlobalConfig () {
     Script_Set(configFile);
     
     config.debug = FALSE;
+    config.fps   = 0;
 
     while (TRUE) {
         Script_GetToken();
@@ -182,7 +183,10 @@ void Script_LoadGlobalConfig () {
         else if (TOKEN_IS("debug")) {
             config.debug = TRUE;
         }
-
+        else if (TOKEN_IS("fps")) {
+            Script_GetToken();
+            config.fps = atol(token);
+        }
     }
 
     Script_Set(NULL);
@@ -197,6 +201,11 @@ void Script_LoadGameConfig () {
     config.textX = 0;
     config.textY = 0;
     config.lineMax = 20;
+    
+    config.titleTextX   = 225;
+    config.titleTextY   = 136;
+    config.titleTextSpW = 5;
+    config.titleTextSpH = 14;
 
     while (TRUE) {
         Script_GetToken();
@@ -219,6 +228,23 @@ void Script_LoadGameConfig () {
         else if (TOKEN_IS("lineMax")) {
             Script_GetToken();
             config.lineMax = atol(token);
+        }
+        // title text config
+        else if (TOKEN_IS("ttx")) {
+            Script_GetToken();
+            config.titleTextX = atol(token);
+        }
+        else if (TOKEN_IS("tty")) {
+            Script_GetToken();
+            config.titleTextY = atol(token);
+        }
+        else if (TOKEN_IS("ttw")) {
+            Script_GetToken();
+            config.titleTextSpW = atol(token);
+        }
+        else if (TOKEN_IS("tth")) {
+            Script_GetToken();
+            config.titleTextSpH = atol(token);
         }
     }
 

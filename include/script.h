@@ -40,6 +40,11 @@ typedef struct {
     int     textY;
     int     nameX;
     int     lineMax;
+    int     fps;
+    int     titleTextX;
+    int     titleTextY;
+    int     titleTextSpW;
+    int     titleTextSpH;
 }
 Configure;
 

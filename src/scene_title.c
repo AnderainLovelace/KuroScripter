@@ -13,18 +13,23 @@
 #include "input.h"
 #include "data.h"
 #include "scene.h"
+#include "script.h"
 
 Sprite * sprTitleBack;
 static int index ;
 
 static void redrawTitle (void) {
+    int i;
+    static char text[][16] = {"开始游戏","读取存档","退出游戏"};
+
     RFPS_Start();
     Graph_Clear();
     {
         Sprite_Apply(sprTitleBack);
-        Font_DrawString(screen,225,136,"开始游戏",index == 0 ? COLOR_WHITE : COLOR_BLACK);
-        Font_DrawString(screen,230,150,"读取存档",index == 1 ? COLOR_WHITE : COLOR_BLACK);
-        Font_DrawString(screen,235,164,"退出游戏",index == 2 ? COLOR_WHITE : COLOR_BLACK);
+        for (i = 0;i < 3;++i)
+            Font_DrawString(screen,
+                            config.titleTextX + config.titleTextSpW * i,config.titleTextY + config.titleTextSpH * i,
+                            text[i],index == i ? COLOR_WHITE : COLOR_BLACK);
     }
     Graph_Flip();    
     RFPS_End ();

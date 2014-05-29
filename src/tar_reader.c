@@ -55,7 +55,7 @@ static size_t getHeaderSize (const TAR_HEADER * header) {
     return oatol(ptr);
 }
 /*!
- * @biref 从tar档中获取指定文件的数据
+ * @brief 从tar档中获取指定文件的数据
  * @param file TAR文件的文件指针
  * @param fileName tar中文件的文件名
  * @param pSize 获取的文件大小
