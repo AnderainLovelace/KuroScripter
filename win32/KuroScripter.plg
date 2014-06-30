@@ -1,0 +1,51 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: KuroScripter - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\Users\ADMINI~1\AppData\Local\Temp\RSPAA53.tmp" with contents
+[
+/nologo /MD /W3 /Gm /GX /ZI /Od /I "../include" /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" /Fp"Debug/KuroScripter.pch" /YX /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"D:\KuroScripter\KuroScripter\src\graph.c"
+]
+Creating command line "cl.exe @C:\Users\ADMINI~1\AppData\Local\Temp\RSPAA53.tmp" 
+Creating temporary file "C:\Users\ADMINI~1\AppData\Local\Temp\RSPAA54.tmp" with contents
+[
+SDL_image.lib SDL.lib SDLmain.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:console /incremental:yes /pdb:"Debug/KuroScripter.pdb" /debug /machine:I386 /out:"Debug/KuroScripter.exe" /pdbtype:sept 
+.\Debug\data.obj
+.\Debug\dlist.obj
+.\Debug\error.obj
+.\Debug\font.obj
+.\Debug\graph.obj
+.\Debug\input.obj
+.\Debug\kuro.obj
+.\Debug\media.obj
+.\Debug\oimg_jpeg.obj
+.\Debug\rotozoom.obj
+.\Debug\scene_data.obj
+.\Debug\scene_select.obj
+.\Debug\scene_talk.obj
+.\Debug\scene_title.obj
+.\Debug\script.obj
+.\Debug\sprite.obj
+.\Debug\tar_reader.obj
+.\Debug\timer.obj
+.\Debug\utils.obj
+.\Debug\resource.res
+]
+Creating command line "link.exe @C:\Users\ADMINI~1\AppData\Local\Temp\RSPAA54.tmp"
+<h3>Output Window</h3>
+Compiling...
+graph.c
+Linking...
+
+
+
+<h3>Results</h3>
+KuroScripter.exe - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

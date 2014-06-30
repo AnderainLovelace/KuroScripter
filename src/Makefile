@@ -5,10 +5,10 @@
 # for Ndless SDK
 #---------------------------------
 DEBUG       = FALSE
-GCC         = nspire-gcc
-AS          = nspire-as
-GXX         = nspire-g++
-LD          = nspire-ld-bflt
+GCC         = gcc
+AS          = as
+GXX         = g++
+LD          = ld-bflt
 GCCFLAGS    = -Wall -W -marm -I../include
 
 LIB         = libjpeg/jdmarker.o libjpeg/jidctred.o libjpeg/jdmaster.o libjpeg/jmemmgr.o libjpeg/jdmerge.o libjpeg/jmemnobs.o libjpeg/jdphuff.o libjpeg/jquant1.o libjpeg/jdapimin.o libjpeg/jdpostct.o libjpeg/jquant2.o libjpeg/jdapistd.o libjpeg/jdsample.o libjpeg/jutils.o libjpeg/jdatasrc.o libjpeg/jerror.o libjpeg/jdcoefct.o libjpeg/jdcolor.o libjpeg/jddctmgr.o libjpeg/jdhuff.o libjpeg/jidctflt.o libjpeg/jcomapi.o libjpeg/jdinput.o libjpeg/jidctfst.o libjpeg/jdmainct.o libjpeg/jidctint.o \

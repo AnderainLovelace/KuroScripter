@@ -1,0 +1,8 @@
+tns/
+win32/Debug/
+win32/krs/
+*.o
+*.tns
+*.doc
+*.a
+*.dll
