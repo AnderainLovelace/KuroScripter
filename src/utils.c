@@ -44,17 +44,17 @@ char * mystrdup(const char * src) {
 static unsigned int* p_contrast = (unsigned int*) 0x900F0020;
 
 void ContrastInc () {
-    if( is_cx && (*p_contrast)< 225)
+    if(has_colors && (*p_contrast)< 225)
         (*p_contrast)++;
-    else if( (!is_cx) && (*p_contrast) < 0xc0 )
+    else if( (!has_colors) && (*p_contrast) < 0xc0 )
     (*p_contrast)++;
 }
 
 void ContrastDec () 
 {
-    if( is_cx && (*p_contrast)> 1 )
+    if(has_colors && (*p_contrast)> 1 )
         (*p_contrast)--;
-        else if( (!is_cx) && (*p_contrast) >50 )
+        else if( (!has_colors) && (*p_contrast) >50 )
     (*p_contrast)--;
 }
 
