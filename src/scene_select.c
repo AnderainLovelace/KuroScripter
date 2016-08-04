@@ -60,7 +60,7 @@ void Scene_Select (BOOL allowCancel) {
  
     index = 0;
     sprSelect = Sprite_LoadImage("select.bmp");
-	if(!data.talkBack)
+	if(*(data.talkBack))
 		sprSelectBack = Sprite_LoadImage(data.talkBack);
 
     while (TRUE) {
@@ -91,6 +91,6 @@ void Scene_Select (BOOL allowCancel) {
     data.var[0] = index;
     data.selectSize = 0;
     Sprite_Free(sprSelect,TRUE);
-	if (!data.talkBack)
+	if (*(data.talkBack))
 		Sprite_Free(sprSelectBack,TRUE);
 }
