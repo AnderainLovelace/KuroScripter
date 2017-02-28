@@ -16,7 +16,7 @@
 #include "script.h"
 
 Sprite * sprTitleBack;
-static int index ;
+static int selectItemIndex ;
 
 static void redrawTitle (void) {
     int i;
@@ -29,14 +29,14 @@ static void redrawTitle (void) {
         for (i = 0;i < 3;++i)
             Font_DrawString(screen,
                             config.titleTextX + config.titleTextSpW * i,config.titleTextY + config.titleTextSpH * i,
-                            text[i],index == i ? COLOR_WHITE : COLOR_BLACK);
+                            text[i],selectItemIndex == i ? COLOR_WHITE : COLOR_BLACK);
     }
     Graph_Flip();    
     RFPS_End ();
 }
 
 int Scene_Title (int t) {
-    index = t;
+    selectItemIndex = t;
 
     sprTitleBack = Sprite_LoadImage("title.jpg");
 
@@ -48,19 +48,19 @@ int Scene_Title (int t) {
             break;
         }
         if (Input_Trigger(GKEY_UP)) {
-            index --;
-            if (index < 0)
-                index = 2;
+            selectItemIndex --;
+            if (selectItemIndex < 0)
+                selectItemIndex = 2;
 			
         }
         if (Input_Trigger(GKEY_DOWN)) {
-            index ++;
-            if (index >= 3)
-                index = 0;
+            selectItemIndex ++;
+            if (selectItemIndex >= 3)
+                selectItemIndex = 0;
         }
 	}
     Sprite_Free(sprTitleBack,TRUE);
     sprTitleBack = NULL;
 
-    return index;
+    return selectItemIndex;
 }

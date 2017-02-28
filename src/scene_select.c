@@ -17,7 +17,7 @@
 static Sprite * sprSelect;
 static Sprite * sprSelectBack;
 
-static int   index;
+static int   selectItemIndex;
 
 void redrawSelect (void) {
     RFPS_Start();
@@ -41,7 +41,7 @@ void redrawSelect (void) {
                 sprSelect->x + (sprSelect->surface->w - Font_GetDrawWidth(data.selectItem[i])) / 2,
                 sprSelect->y + (sprSelect->surface->h - FONT_HEIGHT) / 2,
                 data.selectItem[i],
-                index == i ? COLOR_WHITE : COLOR_BLACK);
+                selectItemIndex == i ? COLOR_WHITE : COLOR_BLACK);
             sprSelect->y += space;
         }
     }
@@ -58,7 +58,7 @@ void Scene_Select (BOOL allowCancel) {
     int i;
     Graph_ScreenSave();
  
-    index = 0;
+    selectItemIndex = 0;
     sprSelect = Sprite_LoadImage("select.bmp");
 	if(*(data.talkBack))
 		sprSelectBack = Sprite_LoadImage(data.talkBack);
@@ -70,25 +70,25 @@ void Scene_Select (BOOL allowCancel) {
             break;
         }
         if (allowCancel && Input_Trigger(GKEY_B)) {
-            index = -1;
+            selectItemIndex = -1;
             break;
         }
         if (Input_Trigger(GKEY_UP)) {
-            index --;
-            if (index < 0)
-                index = data.selectSize - 1;
+            selectItemIndex --;
+            if (selectItemIndex < 0)
+                selectItemIndex = data.selectSize - 1;
         }
         if (Input_Trigger(GKEY_DOWN)) {
-            index ++;
-            if (index >= data.selectSize)
-                index = 0;
+            selectItemIndex ++;
+            if (selectItemIndex >= data.selectSize)
+                selectItemIndex = 0;
         }
 
 	}
     for (i = 0;i < data.selectSize ; ++i) {
         free(data.selectItem[i]);
     }
-    data.var[0] = index;
+    data.var[0] = selectItemIndex;
     data.selectSize = 0;
     Sprite_Free(sprSelect,TRUE);
 	if (*(data.talkBack))
