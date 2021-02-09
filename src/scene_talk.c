@@ -523,6 +523,41 @@ void Scene_Talk () {
             Scene_Select(FALSE);
             //reloadSprite();
         }
+		/* 变量操作 */
+		else if (TOKEN_IS("var")) {
+			int ol,opr,or;
+			/* 获取操作数1 */
+			Script_GetToken();
+			if (token[0] != '$') {
+				Error_Exit("%s is not a valid var in [var] command", token);
+			}
+			else {
+				ol = atol(token + 1);
+			}
+			/* 获取运算符 */
+			Script_GetToken();
+			if (TOKEN_IS("="))
+				opr = 0;
+			else if (TOKEN_IS("+"))
+				opr = 1;
+			else if (TOKEN_IS("-"))
+				opr = 2;
+			else
+				Error_Exit("unkown operator in [var] command:%s", token);
+			/* 获取操作数2 */
+			Script_GetToken();
+			if (token[0] != '$') {
+				or = atol(token);
+			}
+			else {
+				int v = atol(token + 1);
+				or = data.var[v];
+			}
+			/* 运算 */
+			if (opr == 0) data.var[ol] = or ;
+			else if (opr == 1) data.var[ol] += or ;
+			else if (opr == 2) data.var[ol] -= or ;
+		}
         /* 条件跳转 */
         else if (TOKEN_IS("if")) {
             int     ol,or,opr;

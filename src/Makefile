@@ -5,16 +5,18 @@
 # for Ndless SDK
 #---------------------------------
 DEBUG       = FALSE
-GCC         = gcc
+GCC         = nspire-gcc
 AS          = as
 GXX         = g++
-LD          = ld-bflt
+LD          = nspire-ld
 GCCFLAGS    = -Wall -W -marm -I../include
+GENZEHN = genzehn
 
 LIB         = libjpeg/jdmarker.o libjpeg/jidctred.o libjpeg/jdmaster.o libjpeg/jmemmgr.o libjpeg/jdmerge.o libjpeg/jmemnobs.o libjpeg/jdphuff.o libjpeg/jquant1.o libjpeg/jdapimin.o libjpeg/jdpostct.o libjpeg/jquant2.o libjpeg/jdapistd.o libjpeg/jdsample.o libjpeg/jutils.o libjpeg/jdatasrc.o libjpeg/jerror.o libjpeg/jdcoefct.o libjpeg/jdcolor.o libjpeg/jddctmgr.o libjpeg/jdhuff.o libjpeg/jidctflt.o libjpeg/jcomapi.o libjpeg/jdinput.o libjpeg/jidctfst.o libjpeg/jdmainct.o libjpeg/jidctint.o \
 	         -lndls
 	 
-LDFLAGS     = $(LIB) -s
+LDFLAGS     = $(LIB)
+ZEHNFLAGS = --name "KuroScripter"
 
 ifeq ($(DEBUG),FALSE)
 	GCCFLAGS += -Os
@@ -33,29 +35,31 @@ ifneq ($(strip $(CPPOBJS)),)
 	LDFLAGS += --cpp
 endif
 
-EXE         = KuroScripter.tns
+EXE         = KuroScripter
 DISTDIR     = .
 
 vpath %.tns $(DISTDIR)
+vpath %.elf $(DISTDIR)
 
-all: $(EXE)
+all: $(EXE).tns
 
 %.o: %.c
-	$(GCC) $(GCCFLAGS) -c $<
+	$(GCC) $(GCCFLAGS) -c $< -o $@
 
 %.o: %.cpp
-	$(GXX) $(GCCFLAGS) -c $<
+	$(GXX) $(GCCFLAGS) -c $< -o $@
 	
 %.o: %.S
-	$(AS) -c $<
+	$(AS) -c $< -o $@
 
-$(EXE): $(OBJS)
+$(EXE).elf: $(OBJS)
 	mkdir -p $(DISTDIR)
-	$(LD) $^ -o $(DISTDIR)/$@ $(LDFLAGS)
+	$(LD) $^ -o $@ $(LDFLAGS)
 
-ifeq ($(DEBUG),FALSE)
-	@rm -f $(DISTDIR)/*.gdb
-endif
+$(EXE).tns: $(EXE).elf
+	$(GENZEHN) --input $^ --output $@.zehn $(ZEHNFLAGS)
+	make-prg $@.zehn $@
+	rm $@.zehn
 
 clean:
-	rm -f *.o *.elf $(DISTDIR)/*.gdb $(DISTDIR)/$(EXE)
+	rm -f $(OBJS) $(DISTDIR)/$(EXE).tns $(DISTDIR)/$(EXE).elf $(DISTDIR)/$(EXE).zehn

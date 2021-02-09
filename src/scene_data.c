@@ -22,7 +22,7 @@
 Sprite *    sprDataBack;
 Sprite *    sprSelect;
 
-static int         index;
+static int         selectItemIndex;
 static int         page;
 
 static char itemText[PAGE_ITEM_MAX][64];
@@ -69,7 +69,7 @@ static void redrawData (void) {
                 sprSelect->x + (sprSelect->surface->w - Font_GetDrawWidth(itemText[i])) / 2,
                 sprSelect->y + (sprSelect->surface->h - FONT_HEIGHT) / 2,
                 itemText[i],
-                index == i ? COLOR_WHITE : COLOR_BLACK);
+                selectItemIndex == i ? COLOR_WHITE : COLOR_BLACK);
             sprSelect->y += space;
         }
     }
@@ -85,7 +85,7 @@ static void redrawData (void) {
 const char * Scene_Data (int type) {
     sprSelect = Sprite_LoadImage("select.bmp");
     sprDataBack = Sprite_LoadImage(type==SCENE_SAVE ? "back_save.jpg" : "back_load.jpg");
-    index = 0;
+    selectItemIndex = 0;
     page = 0;
 
     refreshItem();
@@ -96,8 +96,8 @@ const char * Scene_Data (int type) {
         redrawData ();
         Input_Update();
         if (Input_Trigger(GKEY_A)) {
-            if ((type == SCENE_LOAD && itemExist[index]) || type == SCENE_SAVE) {
-                sprintf(fileName,SAVE_FILE_PATH "%d" SAVE_FILE_EXT,index + page * PAGE_ITEM_MAX);
+            if ((type == SCENE_LOAD && itemExist[selectItemIndex]) || type == SCENE_SAVE) {
+                sprintf(fileName,SAVE_FILE_PATH "%d" SAVE_FILE_EXT,selectItemIndex + page * PAGE_ITEM_MAX);
                 break;
             }
         }
@@ -117,14 +117,14 @@ const char * Scene_Data (int type) {
             refreshItem();
         }
         if (Input_Trigger(GKEY_UP)) {
-            index --;
-            if (index < 0)
-                index = PAGE_ITEM_MAX - 1;
+            selectItemIndex --;
+            if (selectItemIndex < 0)
+                selectItemIndex = PAGE_ITEM_MAX - 1;
         }
         if (Input_Trigger(GKEY_DOWN)) {
-            index ++;
-            if (index >= PAGE_ITEM_MAX)
-                index = 0;
+            selectItemIndex ++;
+            if (selectItemIndex >= PAGE_ITEM_MAX)
+                selectItemIndex = 0;
         }
 	}
     Sprite_Free(sprDataBack,TRUE);

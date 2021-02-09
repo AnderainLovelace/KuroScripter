@@ -7,16 +7,16 @@
 
 #define FRAMES_PER_SECOND 15
 
-static Uint32 time;
+static Uint32 startTime;
 
 void timer_start ()
 {
-	time = SDL_GetTicks();
+	startTime = SDL_GetTicks();
 }
 
 Uint32 timer_get_ticks()
 {
-	return SDL_GetTicks() - time;
+	return SDL_GetTicks() - startTime;
 }
 
 void RFPS_Start()

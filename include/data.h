@@ -1,7 +1,7 @@
 #ifndef _DATA_H_
 #define _DATA_H_
 
-#define VAR_SIZE    20
+#define VAR_SIZE    255
 #define ITEM_SIZE   20
 /*
  * 角色最大数量
